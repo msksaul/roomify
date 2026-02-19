@@ -1,13 +1,17 @@
+import Navbar from 'components/Navbar';
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Roomify" },
+    { name: "description", content: "AI Powered application designed to convert architectal designs into 3D images." },
   ];
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div className='home'>
+      <Navbar />
+    </div>
+  )
 }
