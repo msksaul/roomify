@@ -2,6 +2,8 @@ import Navbar from 'components/Navbar';
 import type { Route } from "./+types/home";
 import { ArrowRight, ArrowUpRight, ClockIcon, Layers } from 'lucide-react';
 import Button from 'components/ui/Button';
+import Upload from 'components/Upload';
+import { useNavigate } from 'react-router';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,6 +13,17 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+
+  const navigate = useNavigate()
+
+  const handleUploadComplete = async (base64Image: string) => {
+    const newId = Date.now().toString()
+
+    navigate(`/visualizer/${newId}`)
+
+    return true
+  }
+
   return (
     <div className='home'>
       <Navbar />
@@ -27,7 +40,7 @@ export default function Home() {
         <h1>Built bautiful spaces at the spped of thought with Roomify</h1>
 
         <p className='subtitle'>
-          Roomify is an AI-first design environment that helps you cisualize, render, and ship
+          Roomify is an AI-first design environment that helps you visualize, render, and ship
           architectural projects faster than ever
         </p>
 
@@ -51,10 +64,12 @@ export default function Home() {
               </div>
 
               <h3>Upload your floor plan</h3>
-              <p>Supports JPG, PNG, formats up to 10MB</p>
+              <p>Supports JPG, PNG, formats up to 10 MB</p>
             </div>
 
-            <p>Upload images</p>
+            <Upload
+              onComplete={handleUploadComplete}
+            />
           </div>
         </div>
       </section>
